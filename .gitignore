@@ -1,0 +1,59 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Compiled files
+*.so
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Logs
+*.log
+
+# Virtual environment
+venv/
+env/
+ENV/
+.venv/
+
+# ML models
+*.h5
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.pickle
+*.pkl
+
+
+# datasets
+data/
+datasets/
+*.csv
+*.zip
+*.tar.gz
+
+
+# environment variables
+.env
+.env.local
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# Mac
+.DS_Store
+
+
+.ipynb_checkpoints/
+
+node_modules/
+build/
