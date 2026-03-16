@@ -1,40 +1,35 @@
-function ContactSection(){
+function ContactSection() {
 
-return(
+  return (
+    <section id="contact" className="contact">
 
-<section id="contact" className="contact">
+      <div className="main-text scroll-scale">
+        <span>Ask me a Question</span>
+        <h2>Contact Me</h2>
+      </div>
 
-<div className="main-text">
+      <form action="#" className="scroll-bottom">
 
-<span>Ask me a Question</span>
+        <input type="text" placeholder="Your Name" />
 
-<h2>Contact Me</h2>
+        <input type="email" placeholder="Your Email" />
 
-</div>
+        <input type="text" placeholder="Your Address" />
 
-<form>
+        <input type="text" placeholder="Phone Number" />
 
-<input type="text" placeholder="Your Name"/>
+        <textarea cols="30" rows="10" placeholder="Your Message"></textarea>
 
-<input type="text" placeholder="Your Email"/>
+        <div className="btn-box formBtn">
+          <button type="submit" className="btn">
+            Send Message
+          </button>
+        </div>
 
-<input type="text" placeholder="Your Address"/>
+      </form>
 
-<input type="text" placeholder="Phone Number"/>
-
-<textarea rows="10" placeholder="Your Message"></textarea>
-
-<div className="btn-box formBtn">
-
-<button className="btn">Send Message</button>
-
-</div>
-
-</form>
-
-</section>
-
-)
+    </section>
+  )
 
 }
 

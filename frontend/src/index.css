@@ -333,113 +333,162 @@ section{ padding: 120px 10% 100px; }
 
 .social-icons a:hover::before{ width: 100%; }
 
-/* HOME IMAGE — PERFECT CIRCLE */
-.home-image{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    animation: slideInRight 1s ease forwards;
-    opacity: 0;
-    animation-delay: 0.5s;
+/* ============================= */
+/* HOME IMAGE — PERFECT CIRCLE  */
+/* ============================= */
+
+.home-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: slideInRight 1s ease forwards;
+  opacity: 0;
+  animation-delay: 0.5s;
 }
 
-/* Outer container for rings + orbit particles */
+/* Container for rings and particles */
 .snap-wrapper {
-    position: relative;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    width: 400px;
-    height: 400px;
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 440px;   /* ⬆ increased from 400px */
+  height: 440px;  /* ⬆ increased from 400px */
 }
 
-.img-box{
-    position: relative;
-    z-index: 3;
-    width: 340px;
-    height: 340px;
-    border-radius: 50%;
-    overflow: hidden;          /* CLIPS image into circle */
-    border: 3px solid rgba(18, 247, 255, 0.6);
-    box-shadow:
-        0 0 0 6px rgba(18, 247, 255, 0.08),
-        0 0 40px rgba(18, 247, 255, 0.4),
-        0 0 80px rgba(18, 247, 255, 0.15),
-        inset 0 0 30px rgba(18, 247, 255, 0.05);
-    background: #04040f;
+/* Main circular photo container */
+.img-box {
+  position: relative;
+  z-index: 3;
+  width: 380px;   /* ⬆ increased from 340px */
+  height: 380px;  /* ⬆ increased from 340px */
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid rgba(18, 247, 255, 0.6);
+  box-shadow:
+    0 0 0 6px rgba(18, 247, 255, 0.08),
+    0 0 40px rgba(18, 247, 255, 0.4),
+    0 0 80px rgba(18, 247, 255, 0.15),
+    inset 0 0 30px rgba(18, 247, 255, 0.05);
+  background: #04040f;
 }
 
-.img-box img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;          /* fills circle perfectly, no distortion */
-    object-position: center top;/* head stays centred */
-    display: block;
-    transition: transform 0.5s ease, filter 0.5s ease;
-    transform-origin: center center;
-    filter: brightness(1.05) contrast(1.05);
+/* Image inside circle */
+/* Image inside circle */
+.img-box img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  /* Pull image upward to center the face */
+  object-position: 40% 65%;;
+
+  /* ✅ KEY FIX: Zoom out hard so full head fits */
+  transform: scale(0.72);
+
+  display: inline-block;
+  transition: transform 0.5s ease, filter 0.5s ease;
+  transform-origin: center 30%;   /* ✅ scale from top-center, not middle */
+
+  filter: brightness(1.05) contrast(1.05);
 }
 
-/* Photo gently breathes */
+/* Subtle breathing animation */
 .img-box img:not(.snapping) {
-    animation: photoBreathe 6s ease-in-out infinite;
+  animation: photoBreathe 6s ease-in-out infinite;
 }
 
-/* Animated glow ring 1 */
+/* ============================= */
+/* GLOW RINGS                   */
+/* ============================= */
+
 .glow-ring {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 370px; height: 370px;
-    border-radius: 50%;
-    border: 2px solid rgba(18, 247, 255, 0.25);
-    box-shadow:
-        0 0 30px rgba(18, 247, 255, 0.12),
-        inset 0 0 30px rgba(18, 247, 255, 0.06);
-    animation: ringPulse 4s ease-in-out infinite;
-    z-index: 2;
-    pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 415px;   /* ⬆ increased from 370px */
+  height: 415px;  /* ⬆ increased from 370px */
+
+  border-radius: 50%;
+  border: 2px solid rgba(18, 247, 255, 0.25);
+  box-shadow:
+    0 0 30px rgba(18, 247, 255, 0.12),
+    inset 0 0 30px rgba(18, 247, 255, 0.06);
+  animation: ringPulse 4s ease-in-out infinite;
+  z-index: 2;
+  pointer-events: none;
 }
 
-/* Ring 2 */
+/* Ring layer 2 */
 .glow-ring::before {
-    content: '';
-    position: absolute;
-    top: -18px; left: -18px; right: -18px; bottom: -18px;
-    border-radius: 50%;
-    border: 1px solid rgba(18, 247, 255, 0.12);
-    animation: ringPulse 4s ease-in-out 1s infinite reverse;
+  content: '';
+  position: absolute;
+  top: -18px;
+  left: -18px;
+  right: -18px;
+  bottom: -18px;
+  border-radius: 50%;
+  border: 1px solid rgba(18, 247, 255, 0.12);
+  animation: ringPulse 4s ease-in-out 1s infinite reverse;
 }
 
-/* Ring 3 — dashed rotating */
+/* Ring layer 3 (rotating dashed ring) */
 .glow-ring::after {
-    content: '';
-    position: absolute;
-    top: -36px; left: -36px; right: -36px; bottom: -36px;
-    border-radius: 50%;
-    border: 1px dashed rgba(18, 247, 255, 0.08);
-    animation: ringRotate 20s linear infinite;
+  content: '';
+  position: absolute;
+  top: -36px;
+  left: -36px;
+  right: -36px;
+  bottom: -36px;
+  border-radius: 50%;
+  border: 1px dashed rgba(18, 247, 255, 0.08);
+  animation: ringRotate 20s linear infinite;
 }
 
-/* Orbital particles around image */
+/* ============================= */
+/* ORBIT PARTICLES              */
+/* ============================= */
+
 .orbit-particle {
-    position: absolute;
-    width: 5px; height: 5px;
-    background: var(--hover-color);
-    border-radius: 50%;
-    box-shadow: 0 0 8px var(--hover-color), 0 0 16px rgba(18,247,255,0.5);
-    top: 50%; left: 50%;
-    pointer-events: none;
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: var(--hover-color);
+  border-radius: 50%;
+  box-shadow:
+    0 0 8px var(--hover-color),
+    0 0 16px rgba(18, 247, 255, 0.5);
+  top: 50%;
+  left: 50%;
+  pointer-events: none;
 }
+
+/* ============================= */
+/* ANIMATIONS                   */
+/* ============================= */
 
 @keyframes photoBreathe {
-    0%, 100% { transform: scale(1); }
-    50%       { transform: scale(1.03); }
+  0%, 100% { transform: scale(0.82); }
+  50%       { transform: scale(0.74); }
+}
+
+@keyframes ringPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
 }
 
 @keyframes ringRotate {
-    from { transform: translate(-50%,-50%) rotate(0deg); }
-    to   { transform: translate(-50%,-50%) rotate(360deg); }
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 /* ========== ABOUT SECTION ========== */
@@ -880,22 +929,22 @@ section{ padding: 120px 10% 100px; }
 }
 
 /* ========== CONTACT ========== */
-.contant{
+.contact{
     background: rgba(10, 10, 26, 0.8);
     backdrop-filter: blur(10px);
     border-top: 1px solid rgba(18,247,255,0.08);
     width: 100%;
 }
 
-.contant form{
+.contact form{
     text-align: center;
     max-width: 50rem;
     margin: 1rem auto;
     margin-bottom: 3rem;
 }
 
-.contant form input,
-.contant form textarea{
+.contact form input,
+.contact form textarea{
     width: 100%;
     color: var(--text-color);
     background: rgba(4,4,15,0.8);
@@ -908,14 +957,14 @@ section{ padding: 120px 10% 100px; }
     transition: border-color 0.3s;
 }
 
-.contant form input:focus,
-.contant form textarea:focus {
+.contact form input:focus,
+.contact form textarea:focus {
     outline: none;
     border-color: var(--hover-color);
     box-shadow: 0 0 10px rgba(18,247,255,0.2);
 }
 
-.contant form textarea{ resize: none; }
+.contact form textarea{ resize: none; }
 
 .formBtn{
     display: flex;

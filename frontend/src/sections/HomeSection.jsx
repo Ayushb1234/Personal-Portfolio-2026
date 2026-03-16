@@ -1,14 +1,18 @@
-import profile from "../assets/images/profile.png"
+import profile from "../assets/images/ayush photo.png"
 
 import useTextAnimation from "../hooks/useTextAnimation"
 import useScrollReveal from "../hooks/useScrollReveal"
 import useHeaderScroll from "../hooks/useHeaderScroll"
+import useReadMore from "../hooks/useReadMore"
+import useSkillCircles from "../hooks/useSkillCircles"
 
 function HomeSection() {
 
   useTextAnimation()
   useScrollReveal()
   useHeaderScroll()
+  useReadMore()
+  useSkillCircles()
 
   return (
 
@@ -26,11 +30,11 @@ Hi! I'm <span>Ayush Choudhary</span>
 
 <h3>
 
-<span className="word">Web Developer</span>
-<span className="word">App Developer</span>
-<span className="word">AI-ML Programmer</span>
-<span className="word">Software Designer</span>
-<span className="word">Coder</span>
+<span className="word">Web  Developer</span>
+<span className="word">App  Developer</span>
+<span className="word">AI-ML  Programmer</span>
+<span className="word">Software  Designer</span>
+<span className="word">Coder </span>
 
 </h3>
 

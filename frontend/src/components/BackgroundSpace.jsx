@@ -1,67 +1,104 @@
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import * as THREE from "three"
 
-function BackgroundSpace(){
+function BackgroundSpace() {
 
-useEffect(()=>{
+  const canvasRef = useRef(null)
 
-const canvas=document.getElementById("space-canvas")
+  useEffect(() => {
 
-const renderer=new THREE.WebGLRenderer({canvas,alpha:true})
+    const canvas = canvasRef.current
 
-renderer.setSize(window.innerWidth,window.innerHeight)
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      alpha: true
+    })
 
-const scene=new THREE.Scene()
+    renderer.setSize(window.innerWidth, window.innerHeight)
+    renderer.setPixelRatio(window.devicePixelRatio)
 
-const camera=new THREE.PerspectiveCamera(
-75,
-window.innerWidth/window.innerHeight,
-0.1,
-2000
-)
+    const scene = new THREE.Scene()
 
-camera.position.z=600
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      2000
+    )
 
-const starCount=2800
-const starGeo=new THREE.BufferGeometry()
+    camera.position.z = 600
 
-const starPositions=new Float32Array(starCount*3)
+    const starCount = 2800
+    const starGeo = new THREE.BufferGeometry()
 
-for(let i=0;i<starCount;i++){
+    const starPositions = new Float32Array(starCount * 3)
 
-starPositions[i*3]=(Math.random()-0.5)*3000
-starPositions[i*3+1]=(Math.random()-0.5)*3000
-starPositions[i*3+2]=(Math.random()-0.5)*2000
+    for (let i = 0; i < starCount; i++) {
 
-}
+      starPositions[i * 3] = (Math.random() - 0.5) * 3000
+      starPositions[i * 3 + 1] = (Math.random() - 0.5) * 3000
+      starPositions[i * 3 + 2] = (Math.random() - 0.5) * 2000
 
-starGeo.setAttribute(
-"position",
-new THREE.BufferAttribute(starPositions,3)
-)
+    }
 
-const stars=new THREE.Points(
-starGeo,
-new THREE.PointsMaterial({color:0xffffff,size:1})
-)
+    starGeo.setAttribute(
+      "position",
+      new THREE.BufferAttribute(starPositions, 3)
+    )
 
-scene.add(stars)
+    const stars = new THREE.Points(
+      starGeo,
+      new THREE.PointsMaterial({
+        color: 0xffffff,
+        size: 1
+      })
+    )
 
-function animate(){
+    scene.add(stars)
 
-requestAnimationFrame(animate)
+    function animate() {
 
-stars.rotation.y+=0.0006
+      stars.rotation.y += 0.0006
 
-renderer.render(scene,camera)
+      renderer.render(scene, camera)
 
-}
+      requestAnimationFrame(animate)
 
-animate()
+    }
 
-},[])
+    animate()
 
-return <canvas id="space-canvas"/>
+    function handleResize() {
+
+      camera.aspect = window.innerWidth / window.innerHeight
+      camera.updateProjectionMatrix()
+
+      renderer.setSize(window.innerWidth, window.innerHeight)
+
+    }
+
+    window.addEventListener("resize", handleResize)
+
+    return () => {
+      window.removeEventListener("resize", handleResize)
+      renderer.dispose()
+    }
+
+  }, [])
+
+  return (
+    <canvas
+      ref={canvasRef}
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        zIndex: -1
+      }}
+    />
+  )
 
 }
 

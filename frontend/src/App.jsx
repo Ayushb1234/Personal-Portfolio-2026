@@ -6,8 +6,8 @@ import HomeSection from "./sections/HomeSection";
 import AboutSection from "./sections/AboutSection";
 import ExperienceSection from "./sections/ExperienceSection";
 import ProjectsSection from "./sections/ProjectsSection";
-import AchievementsSection from "./sections/AchievementsSection";
-import TimelineSection from "./sections/TimelineSection";
+// import AchievementsSection from "./sections/AchievementsSection";
+// import TimelineSection from "./sections/TimelineSection";
 import ContactSection from "./sections/ContactSection";
 
 function App() {
@@ -22,8 +22,8 @@ function App() {
       <AboutSection />
       <ExperienceSection />
       <ProjectsSection />
-      <AchievementsSection />
-      <TimelineSection />
+      {/* <AchievementsSection /> */}
+      {/* <TimelineSection /> */}
       <ContactSection />
 
       <Footer />
