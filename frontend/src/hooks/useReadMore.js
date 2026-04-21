@@ -8,13 +8,16 @@ function setup(btnId,cls){
 
 const btn=document.getElementById(btnId)
 
-if(!btn) return
+if(!btn || btn.hasAttribute("data-state-init")) return
+
+btn.setAttribute("data-state-init", "true")
 
 btn.addEventListener("click",e=>{
 
 e.preventDefault()
 
 const el=document.querySelector(cls)
+if(!el) return;
 
 const open=el.style.display==="block"
 

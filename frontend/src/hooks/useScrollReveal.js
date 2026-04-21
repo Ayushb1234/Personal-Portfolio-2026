@@ -20,6 +20,8 @@ document
 .querySelectorAll(".scroll-scale,.scroll-bottom")
 .forEach(el=>observer.observe(el))
 
+return () => observer.disconnect()
+
 },[])
 
 }
